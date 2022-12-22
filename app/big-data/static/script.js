@@ -1,18 +1,4 @@
-/*
-Copyright 2022 Google LLC
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    https://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
+const eRefreshBlock = document.getElementById('refresh-block')
 const eInputBlock = document.getElementById('input-block')
 const eSpinnerBlock = document.getElementById('spinner-block')
 const eSpinner = document.getElementById('spinner')
@@ -25,11 +11,26 @@ const eDownloadButton = document.getElementById('download-button')
 const ePrintButton = document.getElementById('print-button')
 var dropEffect = 'none'
 
-async function fetchColoringPage(inputFile) {
+async function fetchColoringPage(inputFile, model) {
+    console.log(model)
     const formData = new FormData()
     formData.append('input-image', inputFile)
-
-    const url = '/api/coloring-page'
+    formData.append('model-type', model)
+    var url = ''
+    if(model === 'A'){
+        url = '/api/model-a';
+    } else if (model === 'B'){
+        url = '/api/model-b';
+    } else if (model === 'C'){
+        url = '/api/model-c';
+    }else if (model === 'D'){
+        url = '/api/model-d';
+    }else if (model === 'E'){
+        url = '/api/model-e';
+    }else{
+        url = '/api/coloring-page';
+    }
+    console.log(url)
     const init = { method: 'POST', body: formData }
     try {
         const response = await fetch(url, init)
@@ -40,13 +41,13 @@ async function fetchColoringPage(inputFile) {
     }
 }
 
-async function onNewFile(event) {
-    await processFile(this.files[0])
+async function onNewFile(file, model) {
+    await processFile(file, model)
 }
 
-async function processFile(inputFile) {
+async function processFile(inputFile, model) {
     onProcessStart(inputFile)
-    const outputFile = await fetchColoringPage(inputFile)
+    const outputFile = await fetchColoringPage(inputFile, model)
     onProcessEnd(outputFile)
 }
 
@@ -54,6 +55,7 @@ async function onProcessStart(inputFile) {
     eInputBlock.hidden = true
     eOutputBlock.hidden = true
     eCommandBlock.hidden = true
+    eRefreshBlock.hidden = true
     eSpinner.className = 'spinner-waiting'
     eSpinnerBlock.hidden = false
 
@@ -76,6 +78,7 @@ async function onProcessEnd(coloringPage) {
         eSpinner.className = 'spinner-error'
         eSpinnerBlock.hidden = true
         eInputBlock.hidden = false
+        eRefreshBlock.hidden = true
         return
     }
     eSpinner.className = 'spinner-finishing'
@@ -94,6 +97,7 @@ async function onProcessEnd(coloringPage) {
 
     eSpinnerBlock.hidden = true
     eOutputBlock.hidden = false
+    eRefreshBlock.hidden = false
     eCommandBlock.hidden = false
 }
 
@@ -152,10 +156,20 @@ function draggedImageItem(event) {
     return (item.kind == 'file' && item.type.startsWith('image/')) ? item : null
 }
 
-function init() {
-    const eInputElement = document.getElementById('input')
-    eInputElement.addEventListener('change', onNewFile, false)
+function refreshPage(){
+    window.location.reload();
+} 
 
+function init() {
+    
+    const eInputElement = document.getElementById('input')
+    eInputElement.addEventListener('change', function(event){
+        event.preventDefault();
+        let model =  document.querySelector('input[name="optradio"]:checked').value;
+        onNewFile(this.files[0], model)
+    }, false)
+
+    
     document.ondragenter = document.ondragleave = onDragEnterLeave
     document.ondragover = onDragOver
     document.ondrop = onFileDrop

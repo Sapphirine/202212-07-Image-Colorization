@@ -11,11 +11,34 @@
     <script type="module"
         src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.70/dist/shoelace.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
+    <script src="script.js" defer></script>
 </head>
 
 <body>
-    <h1>Coloring Page Generator</h1>
+    <h1 >Image Re-Colorization Tool</h1>
+    <sl-card>
+    <div id="model-block">
+        <p>Select genre of your desired image:</p>
+        <form name="models">
+          <label class="radio-inline">
+            <input type="radio" value="A" name="optradio" checked>Landscape
+          </label>
+          <label class="radio-inline">
+            <input type="radio" value="B" name="optradio">People
+          </label>
+          <label class="radio-inline">
+            <input type="radio" value="C" name="optradio">Fantasy/Anime
+          </label>
+          <label class="radio-inline">
+            <input type="radio" value="D" name="optradio">Animal/Object
+          </label>
+          <label class="radio-inline">
+            <input type="radio" value="E" name="optradio">Style Transfer
+          </label>
+        </form>
+    </div>
+    </sl-card>
+    <br><br>
     <sl-card>
         <div id="input-block">
             <label for="input">Drop or select the picture to process</label>
@@ -32,6 +55,7 @@
             </sl-image-comparer>
         </div>
     </sl-card>
+    <br><br>
     <div id="command-block" hidden>
         <sl-button-group label="commands">
             <sl-tooltip content="Download">
@@ -46,10 +70,16 @@
             </sl-tooltip>
             <sl-tooltip content="Source Code">
                 <sl-button size="large" target="_blank"
-                    href="https://github.com/PicardParis/cherry-on-py/tree/main/cr_image_processing">
+                    href="https://github.com/Fatima2508/big-data-app">
                     <sl-icon name="file-earmark-text"></sl-icon>
                 </sl-button>
             </sl-tooltip>
+        </sl-button-group>
+    </div>
+    <br><br>
+    <div id="refresh-block" hidden>
+        <sl-button-group>
+            <sl-button onClick="window.location.reload();">Refresh Page</sl-button>
         </sl-button-group>
     </div>
 </body>
