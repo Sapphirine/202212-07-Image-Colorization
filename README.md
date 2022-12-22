@@ -5,4 +5,6 @@ Our goal for this project is to create a web application that allows users to co
 - **app/big-data** holds the necesary files needed to run the app. To run the Image Colorization Tool on your local machine first make sure to first unzip the model .h5 files.
     To run : ```python3 main.py```
 
-- **models folder** : contains Jupyter notebook used to train models 
+    > Example images are also provided here
+
+- **models folder** : contains Jupyter notebook used for train models and performing evaluations
