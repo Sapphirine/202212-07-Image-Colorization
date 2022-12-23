@@ -6,5 +6,6 @@ Our goal for this project is to create a web application that allows users to co
     To run : ```python3 main.py```
 
     > Example images are also provided here
+    > Make sure to unzip model files before running the app
 
 - **models folder** : contains Jupyter notebook used for train models and performing evaluations
