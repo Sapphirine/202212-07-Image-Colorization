@@ -8,4 +8,9 @@ Our goal for this project is to create a web application that allows users to co
     > - Example images are also provided here
     > - Make sure to run the load_model notebook to produce models and add them to the app/big-data directory before running the app
 
-- **models folder** : contains Jupyter notebook used for train models and performing evaluations
+- **models folder** : contains Jupyter notebook used for train models and performing evaluations. The models deployed in our application can be found in the links below:
+
+    > landscape: https://drive.google.com/file/d/1-UTFSIhJJlHhdgbm90D0DUS5rgImsFMZ/view?usp=share_link
+    > huamn: https://drive.google.com/file/d/1-GkGE6MjURQKKyfVHpo8TjFzXMeuZbLh/view?usp=share_link
+    > objects/animals: https://drive.google.com/file/d/1-Fuz6JHb_oK4G4PQf1wU4Bi-q7wrd1L2/view?usp=share_link
+    > manga: https://drive.google.com/file/d/1-3pAYhgSD1EUUStdZ_qqx1deEqvj7CCi/view?usp=share_link
